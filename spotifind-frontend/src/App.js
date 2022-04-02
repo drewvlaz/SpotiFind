@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import logo from './logo.svg';
 import './App.css';
-import UploadImage from './components/UploadImage.js'
+import Labels from './components/Labels.js';
 
 function App() {
   return (
@@ -9,6 +8,7 @@ function App() {
       <div className="container mt-2">
         <h1>SpotiFind</h1>
       </div>
+      <Labels />
     </Fragment>
   );
 }
