@@ -5,8 +5,8 @@ Drew Vlasnik, Maggie Zhao :alien:, Theo Ko, Jesse Ssengonzi
 ## Description of project:
 
 ## APIs used:
-- Spotify Web API [https://developer.spotify.com/documentation/web-api/]
-- Cloud Vision API [https://cloud.google.com/vision]
+- [Spotify Web API] [https://developer.spotify.com/documentation/web-api/]
+- [Cloud Vision API] [https://cloud.google.com/vision]
 
 ## Significance:
 
