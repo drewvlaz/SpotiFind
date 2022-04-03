@@ -239,7 +239,6 @@ class SpotifyClient:
             }
         )
         #print(r.json()['uri'])
-        print(r)
         return r.json()['id']
     
     def new_playlist(
@@ -266,6 +265,7 @@ class SpotifyClient:
         return r.json()['id']
 
     def add_to_playlist(self, playlist_id, song_uris):
+        '''song_uris = list of uris which are strings'''
         url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
 
         r = requests.post(
@@ -275,10 +275,10 @@ class SpotifyClient:
                 'Authorization': f'Bearer {self.access_token}'
             },
             json={
+                'position': 0,
                 'uris': song_uris
             }
         )
-        print(r)
         return r.json()
 
 
@@ -303,4 +303,5 @@ s_id = a.get_current_user()
 #print(s_id)
 p_id = a.new_playlist(s_id, name="New Playlist2")
 print(p_id)
-print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))
+#print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))
+print(a.add_to_playlist(p_id, ['spotify:track:0L3XCv9i9IHs8cJEVhsJ3J', 'spotify:track:0sBJA2OCEECMs0HsdIQhvR', 'spotify:track:5O7TgofxqSQh31TiRcKXzo', 'spotify:track:38XLUjlR84JEwK0SOvX77a', 'spotify:track:2cBvJkneFRqK62VDL3yr0c']))
