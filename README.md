@@ -30,14 +30,14 @@ SpotiFind uses three features Google Cloud Vision Detected: FACE_DETECTION, IMAG
 
 - FACE_DETECTION returns a list of strings that describe likeliness of four emotions - Joy, Sorrow, Anger, Surprise. If there are multiple faces, hence a combiination of emotion likelihoods are detected, then they are weighted using variance and mean. The weighted result is taken into account and returns a corresponding keyword for song recommendations. 
 
-- IMAGE_PROPERTIES returns a list of strings that 
+- IMAGE_PROPERTIES returns a list of strings that describe the dominant colours, their RGB composition, and their pixelFraction. It is then used to search songs that corresponds to the predesignated mood keyword and a playlist of the searched songs is created.
 
-- LABEL_DETECTION returns a list of strings that 
+- LABEL_DETECTION returns a list of strings including the labels(or objects) detected from the photo and the confidence score of each item. Based on the confidence score, a list of most accurate lables are presented to the users and then the selected keywords are used to search songs and create a playlist of the songs found.  
 
-## Our visualization
+<!-- ## Our visualization
 
 On the frontend, it takes 
-
+ -->
 ## Launch Instructions
 1. Create and open your virtual environment
 
