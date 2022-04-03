@@ -14,6 +14,7 @@ function SingleLabel({ label, index, toggleLabel }) {
   }
 
       // <span style={{ textDecoration: label.selected ? "line-through" : "" }}>{label.label}</span>
+      // <div className="container mt-2" onClick={() => toggleLabel(index)}>
   return (
     <div className="container mt-2">
       <Card border={label.selected ? "success" : "dark"}>
@@ -59,6 +60,10 @@ const Labels = () => {
     setLabels(newLabels);
   }
 
+  const handleSubmit = () => {
+
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -68,6 +73,7 @@ const Labels = () => {
     }
     fetchData();
   }, []);
+
 
   return (
     <Fragment>
@@ -80,7 +86,7 @@ const Labels = () => {
           />
         ))}
         <div className="container mt-3 text-center d-grid gap-2">
-          <Button variant="outline-dark mb-6" size="large">
+          <Button variant="outline-dark mb-6" size="large" onClick={handleSubmit}>
             Generate Playlist
           </Button>
         </div>
