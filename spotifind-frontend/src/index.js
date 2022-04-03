@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.css';
-import App from './App';
-import { Home, Labels, LoginPage } from './components';
+// import App from './App';
+import { Home, Labels, LoginPage, UploadImage } from './components';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<LoginPage />} />
+      <Route path="/upload" element={<UploadImage />} />
       <Route path="/labels" element={<Labels />} />
     </Routes>
   </Router>,

@@ -24,20 +24,20 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
+/* .App-link { */
+/*   color: #61dafb; */
+/* } */
 
-body {
-  /* background-color: #292424; */
-  /* background-image: linear-gradient(#282c34,black); */
-  background-image: linear-gradient(#282c34,black);
-  /* background-image: url("../public/Assets//panel_1_small.png"); */
-  color: white;
-  padding: 40px;
-  font-family: Arial;
-  text-align: center;
-}
+/* body { */
+/*   /1* background-color: #292424; *1/ */
+/*   /1* background-image: linear-gradient(#282c34,black); *1/ */
+/*   background-image: linear-gradient(#282c34,black); */
+/*   /1* background-image: url("../public/Assets//panel_1_small.png"); *1/ */
+/*   color: white; */
+/*   padding: 40px; */
+/*   font-family: Arial; */
+/*   text-align: center; */
+/* } */
 
 @font-face {
   font-family: "Heubeul Rough";
@@ -58,7 +58,7 @@ h1 {
 }
 
 p1 {
-  color: white;
+  color: black;
   font-family: "Rock";
   font-size: 25px;
   text-align: center;

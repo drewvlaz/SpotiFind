@@ -86,11 +86,6 @@ def color_diff(hex_1_tup, hex_2_tup):
     diff = math.sqrt(((2 + r_mean/256) * (r_delt) ** 2 )+ 4 * (g_delt **2) + (2 + (255-r_mean)/256) * (b_delt ** 2))
     return diff
 
-<<<<<<< HEAD
-#closest_color((155,150,142))
-=======
->>>>>>> e704ff6 (with backend)
-
 # closest_color((155,150,142))
 
 def match_color(color_hex_tuple):

@@ -58,6 +58,15 @@ function LoginPage() {
   const classes = useStyles()
   return (
     <Fragment>
+      <div className="container mt-2">
+        <h1>SpotiFind</h1>
+        <description className="container mt-2">
+        <h1>
+        <br></br>
+          Spotifind turns an image into a playlist; musicify your favorite memory or any picture at all!
+        </h1>
+      </description>
+      </div>
       <div className={classes.login}>
         <a href={url}>LOGIN WITH SPOTIFY</a>
       </div>

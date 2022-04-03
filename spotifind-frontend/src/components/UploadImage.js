@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 import { getDroppedOrSelectedFiles } from 'html5-file-selector';
-import ResultPage from './ResultPage';
-
+import axios from 'axios';
+// import ResultPage from './ResultPage';
 
 
 const UploadImage = () => {
@@ -20,14 +20,27 @@ const UploadImage = () => {
 
     const fileParams = ({ meta }) => {
         return { url: 'https://httpbin.org/post' }
-    }
+    };
     const onFileChange = ({ meta, file }, status) => { 
         console.log(status, meta, file) 
-    }
-    const onSubmit = (files, allFiles) => {
-        allFiles.forEach(f => f.remove())
+    };
 
-    }
+    const sendImageUrl = async (payload) => {
+      await axios
+      .post("http://localhost:5000/flask/upload", payload)
+      .then((res) => console.log(res));
+    };
+
+    // const navigate = useNavigate();
+    const onSubmit = (files, allFiles) => {
+        // console.log("HERE");
+        console.log(files);
+        // console.log("HERE");
+        const payload = { imageUrl: files[0]["meta"]["previewUrl"] }
+        sendImageUrl(payload);
+        // navigate('/labels');
+        // allFiles.forEach(f => f.remove())
+    };
     const getFilesFromEvent = e => {
         return new Promise(resolve => {
             getDroppedOrSelectedFiles(e).then(chosenFiles => {
@@ -35,6 +48,20 @@ const UploadImage = () => {
             })
         })
     }
+
+  const sendAuthToken = async (payload) => {
+    await axios
+    .post("http://localhost:5000/flask/auth", payload)
+    .then((res) => console.log(res));
+  };
+
+  useEffect(() => {
+    const authToken = window.location.hash.split("=")[1].split("&")[0];
+    console.log(authToken);
+    const payload = { authToken: authToken }
+    sendAuthToken(payload);
+  }, []);
+
     const selectFileInput = ({ accept, onFiles, files, getFilesFromEvent }) => {
         const textMsg = files.length > 0 ? 'Upload Again' : 'Click here or drag and drop to upload image'
         return (
