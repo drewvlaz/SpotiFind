@@ -61,7 +61,7 @@ const Labels = () => {
   }
 
   const handleSubmit = () => {
-
+    const returnLabels = labels;
   };
 
   useEffect(() => {

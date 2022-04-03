@@ -89,6 +89,10 @@ p2 {
   justify-content: space-between;
 }
 
+/* .labelcard { */
+/*   border-width: 100px!important; */
+/* } */
+
 *{
     -ms-overflow-style: none;
 }
