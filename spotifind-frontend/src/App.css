@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #484c54;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,6 +28,51 @@
   color: #61dafb;
 }
 
+body {
+  background-color: #191414;
+  /* background-image: url("../public/Assets//panel_1_small.png"); */
+  color: white;
+  padding: 40px;
+  font-family: Arial;
+  text-align: center;
+}
+
+@font-face {
+  font-family: "Heubeul Rough";
+  src: url("../public/fonts/HeubeulRough.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rock";
+  src: url("../public/fonts/ROCK.TTF") format("truetype");
+}
+
+
+h1 {
+  color: white;
+  font-size: 70px;
+  font-family: "Heubeul Rough";
+  text-align: center;
+}
+
+p1 {
+  color: white;
+  font-family: "Rock";
+  font-size: 25px;
+  text-align: center;
+}
+
+description {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+p2 {
+  color: black;
+  font-family: "Rock";
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +80,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.label {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  justify-content: space-between;
+}
+
+/* .labelcard { */
+/*   border-width: 100px!important; */
+/* } */
+
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
 }

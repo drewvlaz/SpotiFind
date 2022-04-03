@@ -1,4 +1,4 @@
-from secrets import CLIENT_ID, CLIENT_SECRET
+from secrets_spot import CLIENT_ID, CLIENT_SECRET
 
 from random import randint
 import requests
@@ -30,7 +30,8 @@ class SpotifyClient:
             data={'grant_type': 'client_credentials'}
         )
 
-        self.access_token = r.json()['access_token']
+        #self.access_token = r.json()['access_token']
+        self.access_token='BQBvfWM7OgfXX3p1AVJPK3A4mjhpMsIUvzXxl3xEhJ1jQJe17v33Eqs6PH6pxX7r9XC-GhkZTZV9314a-qhVxZRFtUY-FshrDsoMshUNtA6rFNWNR4quR3gXEJEjiw7oDwwIhZZHJFVFxBuvCuCXz8eWpo-Em1GljTLmBaU2pTelCDARi32EvfWfM8w-A4LbI-UEceBrKdNqJGsyZ2MHJHNSlcpTfzKoAM4fHIChCkSGasUsRiSKyeMFm10eTA'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -83,8 +84,43 @@ class SpotifyClient:
             }
         )
 
+    def get_category_playlists(self, category_id):
+        """ Get list of available categories """
+
+        url = f'https://api.spotify.com/v1/browse/categories/{category_id}/playlists'
+        
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'country': 'US',
+                'limit': 50,
+            }
+        )
+
         return r.json()
     
+    def get_playlist(self, playlist_id):
+        url = f'https://api.spotify.com/v1/playlists/{playlist_id}'
+
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            },
+            params={
+                'country': 'US',
+                'limit': 50,
+            }
+        )
+
+        return r.json()
+
 
     def search_item(self, query, type):
         """ Search for item in Spotify
@@ -149,6 +185,7 @@ class SpotifyClient:
 
     def get_recommendations(
         self,
+        num: int = 20,
         s_artist: str = None,
         s_track: str = None,
         popular: bool = True,
@@ -161,6 +198,7 @@ class SpotifyClient:
         ):
         """ Get recommended songs from Spotify """
 
+        self.get_all_genres()
         random_genres = ','.join([self.genres[randint(0,len(self.genres)-1)] for _ in range(2)])
 
         url = f'https://api.spotify.com/v1/recommendations'
@@ -176,7 +214,7 @@ class SpotifyClient:
                 'seed_artists': self.search_item(s_artist, 'Artist'),
                 'seed_genres': random_genres if random else 'pop',
                 'seed_tracks': self.search_item(s_track, 'Track'),
-                'limit': 20,
+                'limit': num,
                 'min_popularity': 50 if popular else None,      # value 0 - 100
                 'target_tempo': t_tempo,                        # no range given
                 'target_danceability': t_danceability,          # value 0.0 - 1.0
@@ -187,7 +225,35 @@ class SpotifyClient:
         )
 
         # return [r.json()['tracks'][x]['uri'] for x in range(len(r.json()['tracks']))]
-        return [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
+        #return [r.json()['tracks'][x]['preview_url'] for x in range(len(r.json()['tracks']))]
+        return r.json()
+
+    def get_current_user(self):
+        url = f'https://api.spotify.com/v1/me/'
+        
+        r = requests.get(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}',
+            }
+        )
+        return r.json()['id']
+
+
 
 class SpotifyException(Exception):
 	pass
+
+a = SpotifyClient("Mag")
+#print(a.get_all_categories())
+#print(a.get_all_genres())
+#print(a.genres)
+# r = a.get_category_playlists("mood")['playlists']['items']
+#print(r)
+# l = [(x['name'], x['id']) for x in r]
+#print(l)
+
+#print(a.get_playlist('37i9dQZF1DWYBO1MoTDhZI'))
+#print(a.get_recommendations(s_track='6veNr8pvwqdErGuk5xp2Im', num=3))
+# print(a.get_current_user())
