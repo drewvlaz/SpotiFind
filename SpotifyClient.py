@@ -3,7 +3,7 @@ from secrets_spot import CLIENT_ID, CLIENT_SECRET
 from random import randint
 import requests
 import base64
-
+import json
 class SpotifyClient:
     """ Contains and controls Spotify elements """
 
@@ -30,8 +30,8 @@ class SpotifyClient:
             data={'grant_type': 'client_credentials'}
         )
 
-        # self.access_token = r.json()['access_token']
-        self.access_token='BQAOemid5W_0S8X_AY0jlF163YpyxG4t2LZOvHbxJ0w68G5H3cnamnA3doz3PNU_cZKHKNOWKUZyciR12hq1sSXiRIczGc66phjgxp2larzdw21Bdx5PbqdU3OVbYLakPy0oyl3XqoYCwOPxxy-0B8HOQ0Ujw8kvh4kgE1mO1btfguoXVUp3Wm7KNjDVhB2hgKgXHqCiBU845j-gIlc8Y7uywae4bUuWm7JMgBQWpCnCgt_b4qmvoxN0vIT2bG3p'
+        self.access_token = r.json()['access_token']
+        #self.access_token='BQAOemid5W_0S8X_AY0jlF163YpyxG4t2LZOvHbxJ0w68G5H3cnamnA3doz3PNU_cZKHKNOWKUZyciR12hq1sSXiRIczGc66phjgxp2larzdw21Bdx5PbqdU3OVbYLakPy0oyl3XqoYCwOPxxy-0B8HOQ0Ujw8kvh4kgE1mO1btfguoXVUp3Wm7KNjDVhB2hgKgXHqCiBU845j-gIlc8Y7uywae4bUuWm7JMgBQWpCnCgt_b4qmvoxN0vIT2bG3p'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -287,34 +287,37 @@ class SpotifyClient:
         )
         return r.json()
 
-    def labels_rec(keywords):
+    def labels_rec(self, keywords):
         leng = len(keywords)
+        #print(keywords)
         uris = []
-        
+
         for i in range(0, leng):
-            try:
-                print("https://api.spotify.com/v1/search?q="+keywords[i]+"&type=track&limit=5")
-                r = requests.get(
-                    'https://api.spotify.com/v1/search?q=Product&type=track&limit=5', 
-                    headers={
-                        'Content-Type': 'application/json',
-                        'Authorization': f'Bearer {self.access_token}'})
-                r = r.json()
-                print(r['tracks'])
-                
-                # for j in range(0,3):
-                #     uris.append(r['tracks']['items'][j]['uri']) 
-            except:
-                print("No songs matched")            
+            print('https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5')
+            r = requests.get(
+                'https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5',
+                headers={
+                    'Content-Type': 'application/json',
+                    'Authorization': f'Bearer {self.access_token}'
+                }
+            )
+            
+            #print(r)
+            r = r.json()
+            lim  = r['tracks']['items']
+            #print(json.dumps(lim,indent=4))
+            abra = [x["uri"] for x in lim]
+            uris+=(abra)
+            
+        return uris
         
-        return uris  
 
 
 
 class SpotifyException(Exception):
 	pass
 
-# a = SpotifyClient("Mag")
+a = SpotifyClient("Mag")
 #print(a.get_all_categories())
 #print(a.get_all_genres())
 #print(a.genres)
@@ -332,4 +335,4 @@ class SpotifyException(Exception):
 #print(p_id)
 ##print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))
 #print(a.add_to_playlist(p_id, ['spotify:track:0L3XCv9i9IHs8cJEVhsJ3J', 'spotify:track:0sBJA2OCEECMs0HsdIQhvR', 'spotify:track:5O7TgofxqSQh31TiRcKXzo', 'spotify:track:38XLUjlR84JEwK0SOvX77a', 'spotify:track:2cBvJkneFRqK62VDL3yr0c']))
-
+print(a.labels_rec(['jeans', 'apple', 'table']))
