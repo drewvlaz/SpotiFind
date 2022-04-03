@@ -23,8 +23,8 @@ The user will be able to switch between two modes:
 - Labels - The Vision AI will classify any objects it sees in the image, and we generate a list of songs with those labels in the song title.
 
 
-We hope to explore and provoke the following questions:
-
+<!-- We hope to explore and provoke the following questions:
+ -->
 
 ## Explanation of feature utilization:
 
