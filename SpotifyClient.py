@@ -66,8 +66,7 @@ class SpotifyClient:
 
         self.categories = r.json()
         return [category['id'] for category in self.categories['categories']['items']]
-
-
+    
     def get_single_category(self, category_id):
         """ Get list of available categories """
 
@@ -112,7 +111,7 @@ class SpotifyClient:
         except:
             # raise SpotifyException("Bad Search Parameter")
             return None
-
+        
     def get_artist(self, id):
         """ Gets an artist using their Spotify ID """
 
