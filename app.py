@@ -111,7 +111,6 @@ api.add_resource(HelloApiHandler, '/flask/hello')
     
 #    return f'{playlist}'
 
-<<<<<<< HEAD
 @app.route("/color")
 def find_color():
     client = vision.ImageAnnotatorClient()
@@ -119,7 +118,6 @@ def find_color():
     print(path)
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
-=======
 
 
 #@app.route("/color")
@@ -129,7 +127,6 @@ def find_color():
 #    print(path)
 #    with io.open(path, 'rb') as image_file:
 #        content = image_file.read()
->>>>>>> d7b14be (front and backend communication)
 
 #    image = vision.Image(content=content)
 #    response = client.annotate_image({
@@ -154,8 +151,6 @@ def find_color():
 if __name__ == "__main__":
     app.debug = True
     app.run(host = "0.0.0.0")
-<<<<<<< HEAD
-
 
 def image_to_labels():
     client = vision.ImageAnnotatorClient()
@@ -182,5 +177,3 @@ def image_to_labels():
     urls = labels_rec(keywords)
     print(urls)
     return f'{urls}' 
-=======
->>>>>>> d7b14be (front and backend communication)
