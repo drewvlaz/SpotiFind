@@ -75,7 +75,7 @@ const UploadImage = () => {
             maxFiles={1}
             inputContent="Drop A File"
             styles={{
-                dropzone: { width: 600, height: 400 },
+                dropzone: { width: 600, height: 400, outline: 'none', },
                 dropzoneActive: { 
                     borderColor: '#1db954',
                     backgroundColor: '#1db954',

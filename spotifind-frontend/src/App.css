@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #484c54;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -58,14 +58,13 @@ h1 {
 p1 {
   color: white;
   font-family: "Rock";
+  font-size: 25px;
   text-align: center;
 }
 
 description {
   padding-top: 70px;
   padding-bottom: 70px;
-  
-  /* background-color: #1ed760; */
 }
 
 p2 {
@@ -81,4 +80,18 @@ p2 {
   to {
     transform: rotate(360deg);
   }
+}
+
+.label {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  justify-content: space-between;
+}
+
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
 }

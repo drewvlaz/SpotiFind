@@ -6,12 +6,7 @@ const useStyles = makeStyles({
     login: {
         display: 'grid',
         placeItems: 'center',
-        height: '100vh',
-        backgroundColor: 'black',
-
-        '& img':{
-            width: '50%'
-        },
+        height: '10vh',
 
         '& a':{
             padding: '20px',
@@ -34,10 +29,10 @@ const useStyles = makeStyles({
 function LoginPage() {
     const classes = useStyles()
     return (
+        <div className="container mt-4">
         <div className={classes.login}>
-            <img src="https://getheavy.com/wp-content/uploads/2019/12/spotify2019-830x350.jpg" alt="Spotify-Logo"/>
             <a href="#">LOGIN WITH SPOTIFY</a>
-            <p1> whats up doc</p1>
+        </div> 
         </div> 
     )}
     

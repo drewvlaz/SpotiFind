@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function SingleLabel({ label, index, toggleLabel }) {
@@ -75,6 +75,7 @@ const Labels = () => {
   }, []);
 
 
+  // TODO: Create group for moods and group for keywords
   return (
     <Fragment>
       <div className="container mt-2">

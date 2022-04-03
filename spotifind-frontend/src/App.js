@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import './App.css';
 import UploadImage from './components/UploadImage.js'
-import LoginPage from "./components/LoginPage";
+import LoginPage from './components/LoginPage.js';
+// import Labels from './components/Labels.js';
 
 
 function App() {
@@ -9,18 +10,15 @@ function App() {
     <Fragment> 
       <div className="container mt-2">
         <h1>Spotifind</h1>
-        {/* <LoginPage/> */}
-        <UploadImage/>
-        <description className="container mt-2">
-        <h1>
-        <br></br>
-      
-          Spotifind turns an image into a playlist; musicify your favorite memory or any picture at all!
-        </h1>
-      </description>
+        <div className="container mt-4">
+          <p1>
+            Spotifind turns an image into a playlist; musicify your favorite memory or any picture at all!
+          </p1>
+        </div>
+        <div className="container mt-4">
+          <LoginPage/>
+        </div>
       </div>
-      
-
     </Fragment>
 
   );
