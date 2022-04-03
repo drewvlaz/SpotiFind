@@ -12,7 +12,9 @@ Spotifind turns an image into a playlist based on emotion, colours, and/or key o
 - [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 - [Cloud Vision API](https://cloud.google.com/vision)
 
-## Significance:
+<!-- ## Significance:
+ -->
+
 
 ## Explanation, in broad strokes if necessary, of how you aim to make this data come alive.
 
