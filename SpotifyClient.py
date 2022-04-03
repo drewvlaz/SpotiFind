@@ -31,7 +31,7 @@ class SpotifyClient:
         )
 
         #self.access_token = r.json()['access_token']
-        self.access_token='BQBvfWM7OgfXX3p1AVJPK3A4mjhpMsIUvzXxl3xEhJ1jQJe17v33Eqs6PH6pxX7r9XC-GhkZTZV9314a-qhVxZRFtUY-FshrDsoMshUNtA6rFNWNR4quR3gXEJEjiw7oDwwIhZZHJFVFxBuvCuCXz8eWpo-Em1GljTLmBaU2pTelCDARi32EvfWfM8w-A4LbI-UEceBrKdNqJGsyZ2MHJHNSlcpTfzKoAM4fHIChCkSGasUsRiSKyeMFm10eTA'
+        self.access_token='BQCGA_pS2B6TaWduLMoKN3GR7cfb8OQPXw8rFJFweh-B67vUiCFcOei9_m87d7lRa2Yr4Jk8tYilQSWA0zFSanO6b_XZFbfDkwBY8NrGU4ZUIbvsraA-gtnHZIp7R_0b397h_rB02CrDG_8mzdqKEUppLTLn98v6nXTtsmPu4-VksdeReehANuw9KrXx9AY8WThHUkO8kQvrnNeKoS0WA9916cmlSP2eciGgg24rL3M7KvUG4Fh-P2wBVfmzD4Vt'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -235,10 +235,52 @@ class SpotifyClient:
             url,
             headers={
                 'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}',
+                'Authorization': f'Bearer {self.access_token}'
+            }
+        )
+        #print(r.json()['uri'])
+        print(r)
+        return r.json()['id']
+    
+    def new_playlist(
+        self, 
+        user_id, 
+        name: str = None, 
+        public: bool = False, 
+        collab: bool = False, 
+        descrip: str = None):
+        url = f'https://api.spotify.com/v1/users/{user_id}/playlists'
+        r = requests.post(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}'
+            },
+            json={
+                'name': name if name else 'New Playlist',
+                'public': public,
+                'collaborative': collab,
+                'description': descrip
             }
         )
         return r.json()['id']
+
+    def add_to_playlist(self, playlist_id, song_uris):
+        url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
+
+        r = requests.post(
+            url,
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {self.access_token}'
+            },
+            json={
+                'uris': song_uris
+            }
+        )
+        print(r)
+        return r.json()
+
 
 
 
@@ -257,3 +299,8 @@ a = SpotifyClient("Mag")
 #print(a.get_playlist('37i9dQZF1DWYBO1MoTDhZI'))
 #print(a.get_recommendations(s_track='6veNr8pvwqdErGuk5xp2Im', num=3))
 # print(a.get_current_user())
+s_id = a.get_current_user()
+#print(s_id)
+p_id = a.new_playlist(s_id, name="New Playlist2")
+print(p_id)
+print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))

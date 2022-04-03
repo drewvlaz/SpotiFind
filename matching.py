@@ -49,14 +49,15 @@ def generate_similar_playlist(seed_id):
     #print(seeds)
     #print(json.dumps(pl, indent=4))
     seed_songs = [pl[x]["track"]["id"] for x in seeds if x < len(pl)]
-    seed_urls = [pl[x]["track"]["external_urls"]["spotify"] for x in seeds if x < len(pl)]
+    seed_urls = [pl[x]["track"]["uri"] for x in seeds if x < len(pl)]
     print(seed_urls)
     b = ",".join(seed_songs)
     #print(b)
     c = a.get_recommendations(s_track=b, num=20, random = False)["tracks"]
-    final_urls = [x['external_urls']["spotify"] for x in c]
+    final_urls = [x['uri'] for x in c]
     #print(final_urls)
     url = seed_urls + final_urls
+    print(','.join(url))
     return url
 generate_similar_playlist('37i9dQZF1DWYBO1MoTDhZI')
 #a.get_playlist('37i9dQZF1DWYBO1MoTDhZI')
@@ -69,7 +70,7 @@ def closest_color(color_hex_tuple):
     diffs = [color_diff(color_hex_tuple, x) for x in colors]
     min_diff = min(diffs)
     min_index = diffs.index(min_diff)
-    print("closest color is " + color_s[min_index])
+    #print("closest color is " + color_s[min_index])
     return color_s[min_index]
     
 
@@ -82,7 +83,7 @@ def color_diff(hex_1_tup, hex_2_tup):
     diff = math.sqrt(((2 + r_mean/256) * (r_delt) ** 2 )+ 4 * (g_delt **2) + (2 + (255-r_mean)/256) * (b_delt ** 2))
     return diff
 
-closest_color((155,150,142))
+#closest_color((155,150,142))
 
 '''
 red = anger => 5O12S9z3O8dEhHWt3bPbxm//
@@ -106,7 +107,7 @@ def match_color(color_hex_tuple):
     "black": "68uGYIL2ZyiJxheYDOPWa5", "white": "3nv1mjzIyACjKJ4Wy0RWYg"}
     col = closest_color(color_hex_tuple)
     pl = playlists[col]
-    print(pl)
+    #print(pl)
     return pl
 
 #generate_similar_playlist(match_color((155,150,142)))
