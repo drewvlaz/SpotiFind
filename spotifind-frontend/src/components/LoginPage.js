@@ -52,6 +52,20 @@ function LoginPage() {
   url += '&scope=' + encodeURIComponent(scope);
   url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
   // url += '&state=' + encodeURIComponent(state); 
+  //
+
+  useEffect(() => {
+    // const authToken = window.location.hash.split("=")[1].split("&")[0];
+    const authToken = "alsdfjlksajfdlsalf";
+    console.log(authToken);
+    const payload = { authToken: authToken }
+    const sendAuthToken = async (payload) => {
+      await axios
+      .post("http://localhost:5000/flask/hello", payload)
+      .then((res) => console.log(res));
+    }
+    sendAuthToken(payload);
+  }, []);
 
   const classes = useStyles()
   return (

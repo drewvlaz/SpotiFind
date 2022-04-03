@@ -37,6 +37,7 @@ import random
 def generate_similar_playlist(seed_id):
     a = SpotifyClient("Hack2022")
     pl = a.get_playlist(seed_id)['tracks']['items']
+    # pl = a.get_playlist(seed_id)['tracks']['items']
     #print(pl)
     seeds = []
     index = 0
@@ -47,8 +48,8 @@ def generate_similar_playlist(seed_id):
         
     #print(seeds)
     #print(json.dumps(pl, indent=4))
-    seed_songs = [pl[x]["track"]["id"] for x in seeds]
-    seed_urls = [pl[x]["track"]["external_urls"]["spotify"] for x in seeds]
+    seed_songs = [pl[x]["track"]["id"] for x in seeds if x < len(pl)]
+    seed_urls = [pl[x]["track"]["external_urls"]["spotify"] for x in seeds if x < len(pl)]
     print(seed_urls)
     b = ",".join(seed_songs)
     #print(b)
