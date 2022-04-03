@@ -22,8 +22,16 @@ We hope to explore and provoke the following questions:
 
 ## Explanation of feature utilization:
 
+SpotiFind uses three features Google Cloud Vision Detected: FACE_DETECTION, IMAGE_PROPERTIES, LABEL_DETECTION. 
+(i) FACE_DETECTION returns a list of strings that describe likeliness of four emotions - Joy, Sorrow, Anger, Surprise. If there are multiple faces, hence a combiination of emotion likelihoods are detected, then they are weighted using variance and mean. The weighted result is taken into account and returns a corresponding keyword for song recommendations. 
+
+(ii) IMAGE_PROPERTIES returns a list of strings that 
+
+(iii) LABEL_DETECTION returns a list of strings that 
+
 ## Our visualization
 
+On the frontend, it takes 
 
 ## Launch Instructions
 1. Create and open your virtual environment
