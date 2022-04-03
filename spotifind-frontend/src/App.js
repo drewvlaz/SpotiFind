@@ -2,7 +2,7 @@ import React, { Fragment,useState } from "react";
 import './App.css';
 import UploadImage from './components/UploadImage.js';
 import LoginPage from "./components/LoginPage";
-import ResultPage from "./components/ResultPage";
+// import ResultPage from "./components/ResultPage";
 // import UploadImage from './components/UploadImage.js'
 // import Labels from './components/Labels.js';
 
@@ -13,12 +13,7 @@ function App() {
     <Fragment> 
       <div className="container mt-2">
         <h1>Spotifind</h1>
-        {/* <LoginPage/> */}
-        <UploadImage/>
-      {!hidden ? <ResultPage/> : null}
-      <button onClick={() => setHidden(s => !s)}>
-        Playlist ready! Click here to see your playlist
-      </button>
+        <LoginPage/>
         <description className="container mt-2">
         <h1>
         <br></br>
@@ -29,5 +24,10 @@ function App() {
     </Fragment>
   );
 }
+
+      // {!hidden ? <ResultPage/> : null}
+      // <button onClick={() => setHidden(s => !s)}>
+      //   Playlist ready! Click here to see your playlist
+      // </button>
 
 export default App;
