@@ -30,8 +30,8 @@ class SpotifyClient:
             data={'grant_type': 'client_credentials'}
         )
 
-        self.access_token = r.json()['access_token']
-        # self.access_token='BQBvfWM7OgfXX3p1AVJPK3A4mjhpMsIUvzXxl3xEhJ1jQJe17v33Eqs6PH6pxX7r9XC-GhkZTZV9314a-qhVxZRFtUY-FshrDsoMshUNtA6rFNWNR4quR3gXEJEjiw7oDwwIhZZHJFVFxBuvCuCXz8eWpo-Em1GljTLmBaU2pTelCDARi32EvfWfM8w-A4LbI-UEceBrKdNqJGsyZ2MHJHNSlcpTfzKoAM4fHIChCkSGasUsRiSKyeMFm10eTA'
+        # self.access_token = r.json()['access_token']
+        self.access_token='BQAOemid5W_0S8X_AY0jlF163YpyxG4t2LZOvHbxJ0w68G5H3cnamnA3doz3PNU_cZKHKNOWKUZyciR12hq1sSXiRIczGc66phjgxp2larzdw21Bdx5PbqdU3OVbYLakPy0oyl3XqoYCwOPxxy-0B8HOQ0Ujw8kvh4kgE1mO1btfguoXVUp3Wm7KNjDVhB2hgKgXHqCiBU845j-gIlc8Y7uywae4bUuWm7JMgBQWpCnCgt_b4qmvoxN0vIT2bG3p'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -287,6 +287,27 @@ class SpotifyClient:
         )
         return r.json()
 
+    def labels_rec(keywords):
+        leng = len(keywords)
+        uris = []
+        
+        for i in range(0, leng):
+            try:
+                print("https://api.spotify.com/v1/search?q="+keywords[i]+"&type=track&limit=5")
+                r = requests.get(
+                    'https://api.spotify.com/v1/search?q=Product&type=track&limit=5', 
+                    headers={
+                        'Content-Type': 'application/json',
+                        'Authorization': f'Bearer {self.access_token}'})
+                r = r.json()
+                print(r['tracks'])
+                
+                # for j in range(0,3):
+                #     uris.append(r['tracks']['items'][j]['uri']) 
+            except:
+                print("No songs matched")            
+        
+        return uris  
 
 
 
