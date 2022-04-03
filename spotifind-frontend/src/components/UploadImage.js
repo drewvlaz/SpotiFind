@@ -2,6 +2,8 @@ import React from 'react';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 import { getDroppedOrSelectedFiles } from 'html5-file-selector';
+import ResultPage from './ResultPage';
+
 
 
 const UploadImage = () => {
@@ -24,6 +26,7 @@ const UploadImage = () => {
     }
     const onSubmit = (files, allFiles) => {
         allFiles.forEach(f => f.remove())
+
     }
     const getFilesFromEvent = e => {
         return new Promise(resolve => {
@@ -79,6 +82,7 @@ const UploadImage = () => {
                 dropzoneActive: { 
                     borderColor: '#1db954',
                     backgroundColor: '#1db954',
+                    
              },
             }}            
         />

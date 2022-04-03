@@ -29,7 +29,9 @@
 }
 
 body {
-  background-color: #191414;
+  /* background-color: #292424; */
+  /* background-image: linear-gradient(#282c34,black); */
+  background-image: linear-gradient(#282c34,black);
   /* background-image: url("../public/Assets//panel_1_small.png"); */
   color: white;
   padding: 40px;
