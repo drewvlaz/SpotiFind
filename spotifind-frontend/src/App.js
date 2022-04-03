@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import logo from './logo.svg';
 import './App.css';
 import UploadImage from './components/UploadImage.js'
 import LoginPage from "./components/LoginPage";

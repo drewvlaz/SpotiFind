@@ -65,6 +65,7 @@ class SpotifyClient:
         )
 
         self.categories = r.json()
+        return [category['id'] for category in self.categories['categories']['items']]
 
 
     def get_single_category(self, category_id):
