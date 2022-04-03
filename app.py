@@ -9,8 +9,8 @@ import requests
 from markupsafe import escape
 from google.cloud import vision
 import google.auth
-# from matching import *
-# from SpotifyClient import *
+from matching import *
+from SpotifyClient import *
 from statistics import variance, mean
 
 import random
@@ -23,10 +23,6 @@ def_prob = ['VERY_UNLIKELY', 'UNLIKELY', 'NEUTRAL', 'LIKELY','VERY_LIKELY']
 app = Flask(__name__, static_url_path='', static_folder='spotifind-frontend/build') #create instance of class flask
 CORS(app)
 
-# @app.route("/")
-# def hello_world():
-#     return "<p>Hello, World!</p>"
-
 @app.route("/", defaults={'path':''})
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
@@ -36,23 +32,23 @@ def testing_page():
     return "<p>Testing call</p>"
 
 
-class HelloApiHandler(Resource):
+class ApiHandler(Resource):
   def get(self):
     return {
       'resultStatus': 'SUCCESS',
-      'message': "Hello Api Handler"
+      'message': ""
       }
 
   def post(self):
-    print(self)
+    # print(self)
     parser = reqparse.RequestParser()
-    parser.add_argument('authToken', type=str)
-    # parser.add_argument('message', type=str)
+    parser.add_argument('authToken')
 
     args = parser.parse_args()
 
+    client = SpotifyClient("hack")
     print(args)
-    # note, the post req from frontend needs to match the strings here (e.g. 'type and 'message')
+    print(client.get_current_user(access_token=args["authToken"]))
 
     # request_type = args['authToken']
     # request_json = args['authToken']
@@ -72,8 +68,34 @@ class HelloApiHandler(Resource):
 
     return final_ret
 
+class AuthApiHandler(ApiHandler):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('authToken', type=str)
+        args = parser.parse_args()
+        client = SpotifyClient("hack")
+        print(args)
+        print(client.get_current_user(access_token=args["authToken"]))
+        message = args
+        final_ret = {"status": "Success", "message": message}
+        return final_ret
+
+class LabelsApiHandler(ApiHandler):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('labels', type=str, action='append')
+        args = parser.parse_args()
+        client = SpotifyClient("hack")
+        print(args)
+        # print(client.get_current_user(accesslist_token=args["labels"]))
+        message = args
+        final_ret = {"status": "Success", "message": message}
+        return final_ret
+
+
 api = Api(app)
-api.add_resource(HelloApiHandler, '/flask/hello')
+api.add_resource(AuthApiHandler, '/flask/auth')
+api.add_resource(LabelsApiHandler, '/flask/labels')
 
 #@app.route("/upload")
 #def upload_image():

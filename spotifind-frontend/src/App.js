@@ -3,6 +3,8 @@ import './App.css';
 import UploadImage from './components/UploadImage.js';
 import LoginPage from "./components/LoginPage";
 import ResultPage from "./components/ResultPage";
+// import UploadImage from './components/UploadImage.js'
+// import Labels from './components/Labels.js';
 
 
 function App() {

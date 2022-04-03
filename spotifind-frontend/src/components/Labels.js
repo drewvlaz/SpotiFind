@@ -35,12 +35,12 @@ const Labels = () => {
   const [labels, setLabels] = useState([]);
 
   const createLabels = (rawData) => {
-    const _labels = [];
+    const newLabels = [];
     for (const element of rawData) {
-      _labels.push({'label': element, 'selected': true});
+      newLabels.push({'label': element, 'selected': true});
     }
-    _labels.push({'label': 'Select all', 'selected': true})
-    setLabels(_labels);
+    newLabels.push({'label': 'Select all', 'selected': true})
+    setLabels(newLabels);
   };
 
   const toggleLabel = (index) => {
@@ -60,11 +60,24 @@ const Labels = () => {
     setLabels(newLabels);
   }
 
-  const handleSubmit = () => {
-    const returnLabels = labels;
+  const sendAuthToken = async (payload) => {
+    await axios
+    .post("http://localhost:5000/flask/auth", payload)
+    .then((res) => console.log(res));
   };
 
+  const sendLabels = async (payload) => {
+    await axios
+    .post("http://localhost:5000/flask/labels", payload)
+    .then((res) => console.log(res));
+  };
+
+
   useEffect(() => {
+    const authToken = window.location.hash.split("=")[1].split("&")[0];
+    console.log(authToken);
+    const payload = { authToken: authToken }
+    sendAuthToken(payload);
     const fetchData = async () => {
       await axios
         .get('./data.json')
@@ -74,6 +87,18 @@ const Labels = () => {
     fetchData();
   }, []);
 
+  const handleSubmit = () => {
+    const returnLabels = [];
+    for (const element of labels) {
+      console.log(element.selected);
+      if (element.selected) {
+        returnLabels.push(element.label);
+      }
+    }
+    const payload = { labels: returnLabels };
+    console.log(payload);
+    sendLabels(payload);
+  };
 
   // TODO: Create group for moods and group for keywords
   return (
@@ -87,7 +112,7 @@ const Labels = () => {
           />
         ))}
         <div className="container mt-3 text-center d-grid gap-2">
-          <Button variant="outline-dark mb-6" size="large" onClick={handleSubmit}>
+          <Button variant="outline-dark mb-6" size="large" onClick={() => handleSubmit()}>
             Generate Playlist
           </Button>
         </div>

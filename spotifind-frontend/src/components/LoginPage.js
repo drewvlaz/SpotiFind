@@ -1,6 +1,7 @@
-import React, { useEffect, Fragment } from 'react'
-import axios from 'axios';
+import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+// import axios from 'axios';
+// import { Button } from 'react-bootstrap'
 
 const useStyles = makeStyles({
     login: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
 function LoginPage() {
 
  const client_id = '0a96f61af1d04b7698d8bab9401a23bd';
- const redirect_uri = 'http://localhost:3000/callback';
+ const redirect_uri = 'http://localhost:3000/labels';
 
   // const state = generateRandomString(16);
   // localStorage.setItem(stateKey, state);
@@ -44,6 +45,7 @@ function LoginPage() {
     'playlist-modify-public',
     'playlist-modify-private',
     'playlist-read-private',
+    'playlist-read-collaborative',
   ].join(' ');
 
   let url = 'https://accounts.spotify.com/authorize';
@@ -52,20 +54,6 @@ function LoginPage() {
   url += '&scope=' + encodeURIComponent(scope);
   url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
   // url += '&state=' + encodeURIComponent(state); 
-  //
-
-  useEffect(() => {
-    // const authToken = window.location.hash.split("=")[1].split("&")[0];
-    const authToken = "alsdfjlksajfdlsalf";
-    console.log(authToken);
-    const payload = { authToken: authToken }
-    const sendAuthToken = async (payload) => {
-      await axios
-      .post("http://localhost:5000/flask/hello", payload)
-      .then((res) => console.log(res));
-    }
-    sendAuthToken(payload);
-  }, []);
 
   const classes = useStyles()
   return (
@@ -76,5 +64,6 @@ function LoginPage() {
     </Fragment>
   )
 };
+
 
 export default LoginPage;

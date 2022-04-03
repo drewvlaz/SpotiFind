@@ -1,6 +1,10 @@
 from SpotifyClient import *
 from statistics import variance, mean
+import json
+import random
 import math
+
+
 def match_emotion(list_of_faces):
     a = SpotifyClient("Hack2022")
     mood_list = a.get_category_playlists("mood")['playlists']['items']
@@ -31,9 +35,7 @@ def match_emotion(list_of_faces):
 
     return playlistid
 
-#print(match_emotion([[4,0,0,0]]))
-import json
-import random
+
 def generate_similar_playlist(seed_id):
     a = SpotifyClient("Hack2022")
     pl = a.get_playlist(seed_id)['tracks']['items']
@@ -59,7 +61,8 @@ def generate_similar_playlist(seed_id):
     url = seed_urls + final_urls
     print(','.join(url))
     return url
-generate_similar_playlist('37i9dQZF1DWYBO1MoTDhZI')
+
+# generate_similar_playlist('37i9dQZF1DWYBO1MoTDhZI')
 #a.get_playlist('37i9dQZF1DWYBO1MoTDhZI')
 
 
@@ -83,22 +86,28 @@ def color_diff(hex_1_tup, hex_2_tup):
     diff = math.sqrt(((2 + r_mean/256) * (r_delt) ** 2 )+ 4 * (g_delt **2) + (2 + (255-r_mean)/256) * (b_delt ** 2))
     return diff
 
+<<<<<<< HEAD
 #closest_color((155,150,142))
+=======
+>>>>>>> e704ff6 (with backend)
 
-'''
-red = anger => 5O12S9z3O8dEhHWt3bPbxm//
-orange = playfulness => ("Feelin' Myself", '37i9dQZF1DX6GwdWRQMQpq')
-yellow = happy/sunny days => ('Wake Up Happy', '37i9dQZF1DX0UrRvztWcAU')
-green = envy => 6IbaCObGskjZMODeeMc6K9//
-blue = sad => ('Life Sucks', '37i9dQZF1DX3YSRoSdA634')
-purple = royalty =>('Villain Mode', '37i9dQZF1DX3R7OWWGN4gH')
-pink = love => 4cJ8qUzt5CSTE9XN5uK2z2//
-brown = warm, cocoa, => '(Your Favorite Coffeehouse', '37i9dQZF1DX6ziVCJnEm59')
-gray = melancholy, neutral =>  '5zxPaDEr4XtbvaZdUYN4FJ' //
-black = mournfulness, emo => 68uGYIL2ZyiJxheYDOPWa5 //
-white = cold, shock =>3nv1mjzIyACjKJ4Wy0RWYg //
-'''
+# closest_color((155,150,142))
+
 def match_color(color_hex_tuple):
+    '''
+    red = anger => 5O12S9z3O8dEhHWt3bPbxm//
+    orange = playfulness => ("Feelin' Myself", '37i9dQZF1DX6GwdWRQMQpq')
+    yellow = happy/sunny days => ('Wake Up Happy', '37i9dQZF1DX0UrRvztWcAU')
+    green = envy => 6IbaCObGskjZMODeeMc6K9//
+    blue = sad => ('Life Sucks', '37i9dQZF1DX3YSRoSdA634')
+    purple = royalty =>('Villain Mode', '37i9dQZF1DX3R7OWWGN4gH')
+    pink = love => 4cJ8qUzt5CSTE9XN5uK2z2//
+    brown = warm, cocoa, => '(Your Favorite Coffeehouse', '37i9dQZF1DX6ziVCJnEm59')
+    gray = melancholy, neutral =>  '5zxPaDEr4XtbvaZdUYN4FJ' //
+    black = mournfulness, emo => 68uGYIL2ZyiJxheYDOPWa5 //
+    white = cold, shock =>3nv1mjzIyACjKJ4Wy0RWYg //
+    '''
+
     playlists = {"red": "5O12S9z3O8dEhHWt3bPbxm", "orange":"37i9dQZF1DX6GwdWRQMQpq", 
     "yellow":"37i9dQZF1DX0UrRvztWcAU", "green":"6IbaCObGskjZMODeeMc6K9",
     "blue":"37i9dQZF1DX3YSRoSdA634", "purple":'37i9dQZF1DX3R7OWWGN4gH',
@@ -110,5 +119,6 @@ def match_color(color_hex_tuple):
     #print(pl)
     return pl
 
+
 #generate_similar_playlist(match_color((155,150,142)))
-generate_similar_playlist("5zxPaDEr4XtbvaZdUYN4FJ")
+# generate_similar_playlist("5zxPaDEr4XtbvaZdUYN4FJ")
