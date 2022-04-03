@@ -28,6 +28,52 @@
   color: #61dafb;
 }
 
+body {
+  background-color: #191414;
+  /* background-image: url("../public/Assets//panel_1_small.png"); */
+  color: white;
+  padding: 40px;
+  font-family: Arial;
+  text-align: center;
+}
+
+@font-face {
+  font-family: "Heubeul Rough";
+  src: url("../public/fonts/HeubeulRough.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rock";
+  src: url("../public/fonts/ROCK.TTF") format("truetype");
+}
+
+
+h1 {
+  color: white;
+  font-size: 70px;
+  font-family: "Heubeul Rough";
+  text-align: center;
+}
+
+p1 {
+  color: white;
+  font-family: "Rock";
+  text-align: center;
+}
+
+description {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  
+  /* background-color: #1ed760; */
+}
+
+p2 {
+  color: black;
+  font-family: "Rock";
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
