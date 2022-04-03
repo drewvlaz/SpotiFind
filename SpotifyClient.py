@@ -30,8 +30,8 @@ class SpotifyClient:
             data={'grant_type': 'client_credentials'}
         )
 
-        self.access_token = r.json()['access_token']
-        #self.access_token='BQAOemid5W_0S8X_AY0jlF163YpyxG4t2LZOvHbxJ0w68G5H3cnamnA3doz3PNU_cZKHKNOWKUZyciR12hq1sSXiRIczGc66phjgxp2larzdw21Bdx5PbqdU3OVbYLakPy0oyl3XqoYCwOPxxy-0B8HOQ0Ujw8kvh4kgE1mO1btfguoXVUp3Wm7KNjDVhB2hgKgXHqCiBU845j-gIlc8Y7uywae4bUuWm7JMgBQWpCnCgt_b4qmvoxN0vIT2bG3p'
+        #self.access_token = r.json()['access_token']
+        self.access_token='BQAS6jA1U1QaeWB_Zciq0Sn_DTXLkUFR9FYGe8OdxpAVLw-vXenskds9goIbxu0jdIFsYXDkM68XpdiyzniRmqc2JjSE_V02-oOMVe-krgY8njKVkTEula0-QPzVVvXvHnZRf_DoBMeZI-T_8Efcf_O__R7EhoZNVy6b8obY9W3aMshgzCXRxe0tXCPDxPSlAlFEMTNXZljug47VcIIdwJ__6BFprhDekoAPGLwo3I7FFn1oMi0hCYkCb50U4YiH'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -263,11 +263,11 @@ class SpotifyClient:
                 'name': name if name else 'New Playlist',
                 'public': public,
                 'collaborative': collab,
-                'description': descrip,
-                'Authorization': f'Bearer {self.access_token}',
+                'description': descrip
             }
         )
-        return r.json()
+        #print(r.json())
+        return r.json()['id']
 
 
     def add_to_playlist(self, playlist_id, song_uris):
@@ -293,7 +293,7 @@ class SpotifyClient:
         uris = []
 
         for i in range(0, leng):
-            print('https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5')
+            #print('https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5')
             r = requests.get(
                 'https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5',
                 headers={
@@ -310,14 +310,21 @@ class SpotifyClient:
             uris+=(abra)
             
         return uris
-        
 
+def make_playlist(name, uri):
+    a = SpotifyClient("Hack2022")
+    s_id = a.get_current_user()
+    p_id = a.new_playlist(s_id, name=name, public = True)
+    bb = a.add_to_playlist(p_id, urilist)
+    url = a.get_playlist(p_id)["external_urls"]["spotify"]
+    # print(url)
+    return url
 
 
 class SpotifyException(Exception):
 	pass
 
-a = SpotifyClient("Mag")
+a = SpotifyClient("Hack2022")
 #print(a.get_all_categories())
 #print(a.get_all_genres())
 #print(a.genres)
@@ -329,10 +336,21 @@ a = SpotifyClient("Mag")
 #print(a.get_playlist('37i9dQZF1DWYBO1MoTDhZI'))
 #print(a.get_recommendations(s_track='6veNr8pvwqdErGuk5xp2Im', num=3))
 # print(a.get_current_user())
-#s_id = a.get_current_user()
+s_id = a.get_current_user()
 ##print(s_id)
 #p_id = a.new_playlist(s_id, name="New Playlist2")
 #print(p_id)
 ##print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))
 #print(a.add_to_playlist(p_id, ['spotify:track:0L3XCv9i9IHs8cJEVhsJ3J', 'spotify:track:0sBJA2OCEECMs0HsdIQhvR', 'spotify:track:5O7TgofxqSQh31TiRcKXzo', 'spotify:track:38XLUjlR84JEwK0SOvX77a', 'spotify:track:2cBvJkneFRqK62VDL3yr0c']))
-print(a.labels_rec(['jeans', 'apple', 'table']))
+
+urilist = a.labels_rec(['jeans', 'apple', 'table'])
+#print(urilist)
+strz = ", ".join(['jeans', 'apple', 'table'])
+print(make_playlist("jeans take 2", urilist))
+# print(strz)
+# print(s_id)
+# p_id = a.new_playlist(s_id, name=strz)
+# print(p_id)
+# bb = a.add_to_playlist(p_id, urilist)
+# print(bb)
+
