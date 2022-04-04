@@ -31,7 +31,7 @@ class SpotifyClient:
         )
 
         #self.access_token = r.json()['access_token']
-        self.access_token='BQAS6jA1U1QaeWB_Zciq0Sn_DTXLkUFR9FYGe8OdxpAVLw-vXenskds9goIbxu0jdIFsYXDkM68XpdiyzniRmqc2JjSE_V02-oOMVe-krgY8njKVkTEula0-QPzVVvXvHnZRf_DoBMeZI-T_8Efcf_O__R7EhoZNVy6b8obY9W3aMshgzCXRxe0tXCPDxPSlAlFEMTNXZljug47VcIIdwJ__6BFprhDekoAPGLwo3I7FFn1oMi0hCYkCb50U4YiH'
+        self.access_token='BQCmqlr_o6S-BD0u6RNKJxXVqvANHNozHD7ymMmxW-A2QKCbXNkKOlaW472xVOCUyMK8fJDJAdZyh2JpLHHJSREjapCyVw107dyg-HEGzckstEzL2x7xrJLuZXYM2Lp1bsLVUMF7Y1S1eRMEz5or93BwHpGmQQKgYwtDigNLw0Qt_boYkuhy9BfUqYy-LfahrMA6eVveQRDjBWs6G0oCMGMJPN3Y7hTWbXOU07y9cLG_Yp-wrxEGgS9XiWuGWrr7'
 
     def get_all_genres(self):
         """ Get list of available genres """
@@ -315,7 +315,7 @@ def make_playlist(name, uri):
     a = SpotifyClient("Hack2022")
     s_id = a.get_current_user()
     p_id = a.new_playlist(s_id, name=name, public = True)
-    bb = a.add_to_playlist(p_id, urilist)
+    bb = a.add_to_playlist(p_id, uri)
     url = a.get_playlist(p_id)["external_urls"]["spotify"]
     # print(url)
     return url
@@ -346,11 +346,11 @@ s_id = a.get_current_user()
 urilist = a.labels_rec(['jeans', 'apple', 'table'])
 #print(urilist)
 strz = ", ".join(['jeans', 'apple', 'table'])
-print(make_playlist("jeans take 2", urilist))
+print()
 # print(strz)
 # print(s_id)
 # p_id = a.new_playlist(s_id, name=strz)
 # print(p_id)
-# bb = a.add_to_playlist(p_id, urilist)
+# bb = a.add_to_playlist(p_id, urilist)make_playlist("jeans take 2", urilist)
 # print(bb)
 

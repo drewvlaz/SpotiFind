@@ -18,7 +18,7 @@ def match_emotion(list_of_faces):
     sorrow_total = [x[1] for x in list_of_faces]
     anger_total = [x[2] for x in list_of_faces]
     surprise_total = [x[3] for x in list_of_faces]
-    if (len(list_of_faces) == 1):
+    if (len(list_of_faces) <= 1):
         var_total = 0
     else:
         var_total = sum([variance(x) for x in [joy_total, sorrow_total, anger_total, surprise_total]])
