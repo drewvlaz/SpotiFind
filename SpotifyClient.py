@@ -4,6 +4,7 @@ from random import randint
 import requests
 import base64
 import json
+
 class SpotifyClient:
     """ Contains and controls Spotify elements """
 
@@ -104,20 +105,23 @@ class SpotifyClient:
 
         return r.json()
     
-    def get_playlist(self, playlist_id):
+    def get_playlist(self, playlist_id, access_token):
         url = f'https://api.spotify.com/v1/playlists/{playlist_id}'
 
         r = requests.get(
             url,
             headers={
                 'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}',
+                'Authorization': f'Bearer {access_token}',
             },
             params={
                 'country': 'US',
                 'limit': 50,
             }
         )
+
+        print("HERE")
+        print(r.json())
 
         return r.json()
 
@@ -248,6 +252,7 @@ class SpotifyClient:
     def new_playlist(
         self, 
         user_id, 
+        access_token,
         name: str = "", 
         public: bool = False, 
         collab: bool = False, 
@@ -257,20 +262,20 @@ class SpotifyClient:
             url,
             headers={
                 'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}'
+                'Authorization': f'Bearer {access_token}'
             },
             json={
                 'name': name if name else 'New Playlist',
                 'public': public,
                 'collaborative': collab,
-                'description': descrip
+                'description': descrip,
+                # 'Authorization': f'Bearer {access_token}',
             }
         )
-        #print(r.json())
-        return r.json()['id']
+        return r.json()["id"]
 
 
-    def add_to_playlist(self, playlist_id, song_uris):
+    def add_to_playlist(self, playlist_id, song_uris, access_token):
         '''song_uris = list of uris which are strings'''
         url = f'https://api.spotify.com/v1/playlists/{playlist_id}/tracks'
 
@@ -278,19 +283,23 @@ class SpotifyClient:
             url,
             headers={
                 'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.access_token}'
+                'Authorization': f'Bearer {access_token}'
             },
             json={
                 'position': 0,
                 'uris': song_uris
             }
         )
+
         return r.json()
 
-    def labels_rec(self, keywords):
+    def labels_rec(self, keywords, access_token=None):
         leng = len(keywords)
         #print(keywords)
         uris = []
+
+        if access_token is None:
+            access_token = self.access_token
 
         for i in range(0, leng):
             #print('https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5')
@@ -298,7 +307,7 @@ class SpotifyClient:
                 'https://api.spotify.com/v1/search?q='+keywords[i]+'&type=track&limit=5',
                 headers={
                     'Content-Type': 'application/json',
-                    'Authorization': f'Bearer {self.access_token}'
+                    'Authorization': f'Bearer {access_token}'
                 }
             )
             
@@ -342,15 +351,13 @@ s_id = a.get_current_user()
 #print(p_id)
 ##print(a.add_to_playlist(p_id, 'spotify:track:60iSKGrGazRzICtMjADNSM,spotify:track:5nzZGxQGfIc117nKyCQV8G,spotify:track:3Lp8Xd2K7TwlY32SPvXkvF,spotify:track:4Zy0XJh7mh562WmuiP0vw1,spotify:track:3AJwUDP919kvQ9QcozQPxg,spotify:track:4PnNzWe1LJoAMD5j5RHpI0,spotify:track:2ZltjIqztEpZtafc8w0I9t,spotify:track:5YUyW9opqNsMSEzzecZih1,spotify:track:3Vo4wInECJQuz9BIBMOu8i,spotify:track:4XNrMwGx1SqP01sqkGTDmo,spotify:track:1g1TeDflB6atAy7HKwrzXu,spotify:track:5DZwnLxHjWTZaz9jOpRhxb,spotify:track:1ULa3GfdMKs0MfRpm6xVlu,spotify:track:72jbDTw1piOOj770jWNeaG,spotify:track:1NDxZ7cFAo481dtYWdrUnR,spotify:track:2dLLR6qlu5UJ5gk0dKz0h3,spotify:track:60APt5N2NRaKWf5xzJdzyC,spotify:track:4Q4jmPHwu0wrJvqrld0FQ6,spotify:track:7Fa5UNizycSms5jP3SQD3F,spotify:track:1vVNlXi8gf8tZ7OhnEs4VE,spotify:track:7pNC5ZIKtwUK0ReSpM3P9f,spotify:track:37jTPJgwCCmIGMPB45jrPV,spotify:track:4tERsdVCLtLtrGdFBf9DGC,spotify:track:7s0lDK7y3XLmI7tcsRAbW0,spotify:track:2xbI8Vmyv3TkpTdywpPyNw'))
 #print(a.add_to_playlist(p_id, ['spotify:track:0L3XCv9i9IHs8cJEVhsJ3J', 'spotify:track:0sBJA2OCEECMs0HsdIQhvR', 'spotify:track:5O7TgofxqSQh31TiRcKXzo', 'spotify:track:38XLUjlR84JEwK0SOvX77a', 'spotify:track:2cBvJkneFRqK62VDL3yr0c']))
+print(a.labels_rec(['jeans', 'apple', 'table']))
 
-urilist = a.labels_rec(['jeans', 'apple', 'table'])
-#print(urilist)
-strz = ", ".join(['jeans', 'apple', 'table'])
-print()
-# print(strz)
-# print(s_id)
-# p_id = a.new_playlist(s_id, name=strz)
-# print(p_id)
-# bb = a.add_to_playlist(p_id, urilist)make_playlist("jeans take 2", urilist)
-# print(bb)
+def make_playlist(name, urilist, access_token):
+    a = SpotifyClient("Hack2022")
+    s_id = a.get_current_user(access_token=access_token)
+    p_id = a.new_playlist(s_id, access_token, name=name, public=True)
+    bb = a.add_to_playlist(p_id, urilist, access_token)
+    url = a.get_playlist(p_id, access_token)["external_urls"]["spotify"]
+    return url
 

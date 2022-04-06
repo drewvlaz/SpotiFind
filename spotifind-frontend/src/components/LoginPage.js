@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import logo from '../spotify.png'
 // import axios from 'axios';
 // import { Button } from 'react-bootstrap'
 
@@ -58,13 +59,14 @@ function LoginPage() {
   const classes = useStyles()
   return (
     <Fragment>
-      <div className="container mt-2">
+      <div className="container mt-2 text-center">
+        <img src={logo} alt="Logo" width={50} height={50} />
         <h1>SpotiFind</h1>
         <description className="container mt-2">
-        <h1>
+        <p1>
         <br></br>
           Spotifind turns an image into a playlist; musicify your favorite memory or any picture at all!
-        </h1>
+        </p1>
       </description>
       </div>
       <div className={classes.login}>

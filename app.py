@@ -87,11 +87,14 @@ class LabelsApiHandler(ApiHandler):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('labels', type=str, action='append')
+        parser.add_argument('authToken', type=str)
         args = parser.parse_args()
         client = SpotifyClient("hack")
-        print(args)
+        urilist = client.labels_rec(args["labels"], access_token=args["authToken"])
+        url = make_playlist("UH2022", urilist, args["authToken"])
         # print(client.get_current_user(accesslist_token=args["labels"]))
-        message = args
+        message = url
+        print(url)
         final_ret = {"status": "Success", "message": message}
         return final_ret
 
@@ -154,6 +157,7 @@ class GoogleUploadApiHandler(ApiHandler):
         message = playlist
         final_ret = {"status": "Success", "message": message}
         return final_ret
+
 
 api = Api(app)
 api.add_resource(AuthApiHandler, '/flask/auth')
